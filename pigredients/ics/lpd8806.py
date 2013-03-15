@@ -98,7 +98,7 @@ class LPD8806_Chain(object):
                 self.set_all_random()
                 return self.write()
 
-    def cycle(self, delay=0.01):
+    def cycle(self, delay=0.1):
         inc_vals = {}
         for ic in range(self.number_of_ics):
             inc_vals[ic] = {'R' : True, 'G' : True, 'B' : True}
