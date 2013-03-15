@@ -27,6 +27,7 @@ class LPD8806_Chain(object):
             byte_list.append(0x80 | (int(self.ics[ic]['R']) >> 1))
             byte_list.append(0x80 | (int(self.ics[ic]['G']) >> 1))
             byte_list.append(0x80 | (int(self.ics[ic]['B']) >> 1))
+	#LPD8806 Chipset requires an extra 0x00 per meter to push things along, according to the Arduino Library from adafruit.
         for extra in range(self.number_of_ics//32):
             byte_list.append(0x00)
         self.spi.xfer2(byte_list)
@@ -76,13 +77,13 @@ class LPD8806_Chain(object):
 
     def set_white(self):
         self.set_all_rgb(255,255,255)
-		
-    def set_red(self):
-        self.set_all_rgb(255,0,0)
-
+		#Adafruit strip is G,R,B <- Important...
     def set_green(self):
+        self.set_all_rgb(255,0,0)
+		#Adafruit strip is G,R,B <- Important...
+    def set_red(self):
         self.set_all_rgb(0,255,0)
-
+		#Adafruit strip is G,R,B <- Important...
     def set_blue(self):
             self.set_all_rgb(0,0,255)
 
